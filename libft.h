@@ -12,9 +12,12 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define HEX_BASE "0123456789abcdef"
+# define HEX_BASE_UPPER "0123456789ABCDEF"
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -71,4 +74,12 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+//PRINT_F
+int	ft_printf(const char *format, ...);
+int	char_handler(va_list args, int fd);
+int	str_handler(va_list args, int fd);
+int	nbr_handler(va_list args, int fd);
+int	hex_handler(va_list args, int fd, char specifier);
+int	unbr_handler(va_list args, int fd);
+int	ptr_handler(va_list args, int fd);
 #endif // !LIBFT_H
