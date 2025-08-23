@@ -41,7 +41,7 @@ PART2 = ft_substr.c \
 				ft_putendl_fd.c \
 				ft_putnbr_fd.c \
 
-LIBFT = ft_printf.c \
+PRINTF = ft_printf.c \
 				ft_char_handler.c \
 				ft_str_handler.c \
 				ft_nbr_handler.c \
@@ -59,7 +59,7 @@ BONUS = ft_lstnew_bonus.c \
 				ft_lstmap_bonus.c
 
 
-SRC = $(PART1) $(PART2) $(LIBFT)
+SRC = $(PART1) $(PART2) $(PRINTF)
 
 OBJS := $(SRC:%.c=%.o)
 
