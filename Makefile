@@ -3,7 +3,7 @@ AR = ar -rcs
 RM = rm -f
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror
-INCLUDE = -I .
+INCLUDE = -I includes/
 
 PART1 = ft_isalpha.c \
 				ft_isdigit.c \
@@ -47,6 +47,7 @@ PRINTF = ft_printf.c \
 				ft_nbr_handler.c \
 				ft_unbr_handler.c \
 				ft_ptr_handler.c \
+				ft_hex_handler.c 
 
 BONUS = ft_lstnew_bonus.c \
 				ft_lstadd_front_bonus.c \
@@ -58,12 +59,17 @@ BONUS = ft_lstnew_bonus.c \
 				ft_lstiter_bonus.c \
 				ft_lstmap_bonus.c
 
+GNL = get_next_line.c \
+			get_next_line_utils.c\
 
-SRC = $(PART1) $(PART2) $(PRINTF)
 
-OBJS := $(SRC:%.c=%.o)
+OBJS_DIR = objs
 
-BONUS_OBJS := $(BONUS:%.c=%.o)
+SRC = $(addprefix src/, $(PART1) $(PART2) $(PRINTF) $(GNL))
+
+OBJS := $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC))
+
+BONUS_OBJS := $(BONUS:%.c=$(OBJS_DIR)/%.o)
 
 all: $(NAME)
 
@@ -73,11 +79,13 @@ $(NAME): $(OBJS)
 bonus:
 	@$(MAKE) --no-print-directory OBJS="$(OBJS) $(BONUS_OBJS)"
 
-%.o: %.c
+$(OBJS_DIR)/%.o: src/%.c
+	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CCFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS) $(BONUS_OBJS)
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
