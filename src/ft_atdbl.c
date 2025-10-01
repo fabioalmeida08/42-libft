@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atdbl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fabialme <fabialme@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 10:33:47 by fabialme          #+#    #+#             */
-/*   Updated: 2025/10/01 14:57:53 by fabialme         ###   ########.fr       */
+/*   Created: 2025/10/01 14:57:09 by fabialme          #+#    #+#             */
+/*   Updated: 2025/10/01 14:57:42 by fabialme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+double	ft_atdbl(const char *nptr)
 {
-	int		sum;
+	double		sum;
 	char	sign;
 
 	sum = 0;

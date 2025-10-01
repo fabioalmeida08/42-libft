@@ -82,4 +82,5 @@ int		nbr_handler(va_list args, int fd);
 int		hex_handler(va_list args, int fd, char specifier);
 int		unbr_handler(va_list args, int fd);
 int		ptr_handler(va_list args, int fd);
+double	ft_atdbl(const char *nptr);
 #endif // !LIBFT_H
