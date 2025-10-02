@@ -28,6 +28,7 @@ PART1 = ft_isalpha.c \
 				ft_atoi.c \
 				ft_calloc.c \
 				ft_strdup.c \
+				ft_atdbl.c \
 
 PART2 = ft_substr.c \
 				ft_strjoin.c \
@@ -67,34 +68,38 @@ RED = \033[0;31m
 RESET = \033[0m
 
 OBJS_DIR = objs
+SRCS_DIR = src
 
-SRC = $(addprefix src/, $(PART1) $(PART2) $(PRINTF) $(GNL) $(BONUS))
+# SRC := $(addprefix src/, $(PART1) $(PART2) $(PRINTF) $(GNL) $(BONUS))
 
-OBJS := $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC))
+SRCS := $(PART1) $(PART2) $(PRINTF) $(GNL) $(BONUS)
+SRCS := $(SRCS:%=$(SRCS_DIR)/%)
 
-BONUS_OBJS := $(BONUS:%.c=$(OBJS_DIR)/%.o)
+OBJS := $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+# OBJS := $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
+	@echo "🗜️$(GREEN) Objects files compiled$(RESET) ✅"
 	@echo "🗂️ $(GREEN)$(NAME)$(LIBFT) was created$(RESET) ✅"
 
 bonus:
 	@$(MAKE) --no-print-directory OBJS="$(OBJS) $(BONUS_OBJS)"
 
-$(OBJS_DIR)/%.o: src/%.c
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CCFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJS) $(BONUS_OBJS)
 	@rm -rf $(OBJS_DIR)
-	@echo "$(RED)🧹 Libft Objects removed$(RESET)"
+	@echo "$(RED)🧹 All Objects files removed$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(RED)💥 Libft $(NAME) removed$(RESET)"
+	@echo "$(RED)💥 $(NAME) removed$(RESET)"
 
 re: fclean all
 
