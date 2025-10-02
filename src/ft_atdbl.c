@@ -14,10 +14,10 @@
 
 double	ft_atdbl(const char *nptr)
 {
-	long		integer_part;
-	double		fractional_part;
+	long	integer_part;
+	double	fractional_part;
 	double	pow;
-	char		sign;
+	int		sign;
 
 	integer_part = 0;
 	fractional_part = 0;
@@ -33,9 +33,9 @@ double	ft_atdbl(const char *nptr)
 	if (*nptr == '.')
 		nptr++;
 	while (*nptr)
-		pow /= 10;
 	{
-		fractional_part = fractional_part + (*nptr - 48) * pow;
+		pow /= 10;
+		fractional_part = fractional_part + (*nptr++ - 48) * pow;
 	}
-	return (integer_part + fractional_part * sign);
+	return ((integer_part + fractional_part) * sign);
 }
