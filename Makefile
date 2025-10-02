@@ -62,10 +62,13 @@ BONUS = ft_lstnew_bonus.c \
 GNL = get_next_line.c \
 			get_next_line_utils.c\
 
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
 
 OBJS_DIR = objs
 
-SRC = $(addprefix src/, $(PART1) $(PART2) $(PRINTF) $(GNL))
+SRC = $(addprefix src/, $(PART1) $(PART2) $(PRINTF) $(GNL) $(BONUS))
 
 OBJS := $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC))
 
@@ -74,21 +77,24 @@ BONUS_OBJS := $(BONUS:%.c=$(OBJS_DIR)/%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
+	@echo "🗂️ $(GREEN)$(NAME)$(LIBFT) was created$(RESET) ✅"
 
 bonus:
 	@$(MAKE) --no-print-directory OBJS="$(OBJS) $(BONUS_OBJS)"
 
 $(OBJS_DIR)/%.o: src/%.c
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CCFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CCFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	@$(RM) $(OBJS) $(BONUS_OBJS)
 	@rm -rf $(OBJS_DIR)
+	@echo "$(RED)🧹 Libft Objects removed$(RESET)"
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+	@echo "$(RED)💥 Libft $(NAME) removed$(RESET)"
 
 re: fclean all
 
