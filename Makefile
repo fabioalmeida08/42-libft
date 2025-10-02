@@ -4,6 +4,7 @@ RM = rm -f
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I includes/
+PROJECT_NAME = libft
 
 PART1 = ft_isalpha.c \
 				ft_isdigit.c \
@@ -70,23 +71,17 @@ RESET = \033[0m
 OBJS_DIR = objs
 SRCS_DIR = src
 
-# SRC := $(addprefix src/, $(PART1) $(PART2) $(PRINTF) $(GNL) $(BONUS))
+SRC := $(addprefix $(SRCS_DIR)/, $(PART1) $(PART2) $(PRINTF) $(GNL) $(BONUS))
 
-SRCS := $(PART1) $(PART2) $(PRINTF) $(GNL) $(BONUS)
-SRCS := $(SRCS:%=$(SRCS_DIR)/%)
-
-OBJS := $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
-# OBJS := $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC))
+OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRC))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
-	@echo "🗜️$(GREEN) Objects files compiled$(RESET) ✅"
-	@echo "🗂️ $(GREEN)$(NAME)$(LIBFT) was created$(RESET) ✅"
 
-bonus:
-	@$(MAKE) --no-print-directory OBJS="$(OBJS) $(BONUS_OBJS)"
+	@echo "🗜️$(GREEN) Finished compiling $(PROJECT_NAME) objects$(RESET) ✅"
+	@echo "🗂️ $(GREEN)Built library: $(NAME)$(RESET) ✅"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
@@ -95,11 +90,11 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 clean:
 	@$(RM) $(OBJS) $(BONUS_OBJS)
 	@rm -rf $(OBJS_DIR)
-	@echo "$(RED)🧹 All Objects files removed$(RESET)"
+	@echo "$(RED)🧹 $(PROJECT_NAME) object files removed$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(RED)💥 $(NAME) removed$(RESET)"
+	@echo "$(RED)💥 $(NAME) deleted$(RESET)"
 
 re: fclean all
 
