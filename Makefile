@@ -79,8 +79,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
-	@echo "🛠️ $(GREEN) Finished compiling $(PROJECT_NAME) objects$(RESET)"
-	@echo "📦 $(GREEN)Built library: $(NAME)$(RESET)"
+	@echo "$(GREEN)🛠️ Finished compiling $(PROJECT_NAME) objects$(RESET)"
+	@echo "$(GREEN)📦 Built library: $(NAME)$(RESET)"
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
