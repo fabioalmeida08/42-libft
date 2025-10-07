@@ -3,7 +3,7 @@ AR = ar -rcs
 RM = rm -f
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror
-INCLUDE = -I includes/
+CPPFLAGS = -MMD -MP -I includes/
 PROJECT_NAME = libft
 
 PART1 = ft_isalpha.c \
@@ -30,6 +30,7 @@ PART1 = ft_isalpha.c \
 				ft_calloc.c \
 				ft_strdup.c \
 				ft_atdbl.c \
+				ft_strcmp.c
 
 PART2 = ft_substr.c \
 				ft_strjoin.c \
@@ -75,6 +76,8 @@ SRC := $(addprefix $(SRCS_DIR)/, $(PART1) $(PART2) $(PRINTF) $(GNL) $(BONUS))
 
 OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRC))
 
+DEPS := $(OBJS:.o=.d)
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -84,7 +87,9 @@ $(NAME): $(OBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CCFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CCFLAGS) $(CPPFLAGS) -c $< -o $@
+
+-include $(DEPS)
 
 clean:
 	@$(RM) $(OBJS) $(BONUS_OBJS)
