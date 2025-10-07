@@ -6,7 +6,7 @@
 /*   By: fabialme <fabialme@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 13:55:55 by fabialme          #+#    #+#             */
-/*   Updated: 2025/07/23 13:56:16 by fabialme         ###   ########.fr       */
+/*   Updated: 2025/10/07 11:33:15 by fabialme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ int		hex_handler(va_list args, int fd, char specifier);
 int		unbr_handler(va_list args, int fd);
 int		ptr_handler(va_list args, int fd);
 double	ft_atdbl(const char *nptr);
+int		ft_strcmp(const char *s1, const char *s2);
 #endif // !LIBFT_H
